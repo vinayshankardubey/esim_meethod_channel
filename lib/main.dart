@@ -1,65 +1,64 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:esim_installer_flutter/esim_installer_flutter.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_esim/flutter_esim.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: EsimInstallerHome(),
     );
   }
 }
 
 class EsimInstallerHome extends StatefulWidget {
+  const EsimInstallerHome({super.key});
+
   @override
-  _EsimInstallerHomeState createState() => _EsimInstallerHomeState();
+  EsimInstallerHomeState createState() => EsimInstallerHomeState();
 }
 
-class _EsimInstallerHomeState extends State<EsimInstallerHome> {
-  String _platformVersion = 'Unknown';
+class EsimInstallerHomeState extends State<EsimInstallerHome> {
+  bool isSupportESim = false;
+  final _flutterEsimPlugin = FlutterEsim();
 
   @override
   void initState() {
     super.initState();
-    _initPlatformState();
+    initPlatformState();
+    _flutterEsimPlugin.onEvent.listen((event) {
+      print(event);
+    });
   }
 
-  Future<void> _initPlatformState() async {
-    String platformVersion;
-
+  Future<void> initPlatformState() async {
+    bool isSupportESim;
     try {
-      platformVersion = await EsimInstallerFlutter().getPlatformVersion() ??
-          'Unknown platform version';
-    } catch (e) {
-      platformVersion = 'Failed to get platform version.';
+      isSupportESim = await _flutterEsimPlugin.isSupportESim([]);
+    } on PlatformException {
+      isSupportESim = false;
     }
 
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      isSupportESim = isSupportESim;
     });
   }
 
-  Future<void> _installEsimProfile() async {
-    String result;
-    try {
-      result = await EsimInstallerFlutter().installESimProfile(
-        smdpAddress: 'RSP-0026.OBERTHUR.NET',
-        activationToken: '777FG-KSFV1-F2O3E-CW2X4',
-      );
-    } catch (e) {
-      result = 'Failed to install eSIM profile.';
-    }
-
-    setState(() {});
+  Future<void> installEsim() async {
+    await _flutterEsimPlugin.installEsimProfile(
+      "LPA:1\$RSP-0026.OBERTHUR.NET\$777FG-KSFV1-F2O3E-CW2X4",
+    );
   }
 
   @override
@@ -75,7 +74,6 @@ class _EsimInstallerHomeState extends State<EsimInstallerHome> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Running on: $_platformVersion\n'),
             ElevatedButton(
               onPressed: () {
                 if (Platform.isIOS) {
@@ -84,7 +82,8 @@ class _EsimInstallerHomeState extends State<EsimInstallerHome> {
                     mode: LaunchMode.externalApplication,
                   );
                 } else {
-                  _installEsimProfile;
+                  installEsim();
+                  ;
                 }
               },
               child: const Text('Install eSIM Profile'),
