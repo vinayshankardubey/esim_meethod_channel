@@ -1,21 +1,33 @@
 PODS:
+  - esim_installer_flutter (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_esim (0.0.1):
     - Flutter
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
+  - esim_installer_flutter (from `.symlinks/plugins/esim_installer_flutter/ios`)
   - Flutter (from `Flutter`)
   - flutter_esim (from `.symlinks/plugins/flutter_esim/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 EXTERNAL SOURCES:
+  esim_installer_flutter:
+    :path: ".symlinks/plugins/esim_installer_flutter/ios"
   Flutter:
     :path: Flutter
   flutter_esim:
     :path: ".symlinks/plugins/flutter_esim/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  esim_installer_flutter: 007df0b67fe3c74e9ce2137e4d7584e7714e4a1b
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_esim: 929b8322b5e64f30181a4bd8e6cd7de9ad076386
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 
