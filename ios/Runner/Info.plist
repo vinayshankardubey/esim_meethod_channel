@@ -54,18 +54,38 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>com.apple.developer.networking.HotspotConfiguration</key>
+	<true/>
+	<key>com.apple.developer.networking.vpn.api</key>
+	<true/>
 	<key>CarrierDescriptors</key>
 	<array>
-	<dict>
-		<key>GID1</key>
-		<string>***</string>
-		<key>GID2</key>
-		<string>***</string>
-		<key>MCC</key> <!-- Country Code -->
-		<string>***</string>
-		<key>MNC</key> <!-- Network Code -->
-		<string>***</string>
-	</dict>
+		<dict>
+			<key>MCC</key> <!-- Mobile Country Code -->
+			<string>310</string>
+			<key>MNC</key> <!-- Mobile Network Code -->
+			<string>410</string>
+		</dict>
 	</array>
+	<key>com.apple.security.network.server</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.CommCenter.fine-grained</key>
+	<array>
+		<string>spi</string>
+		<string>sim-authentication</string>
+		<string>identity</string>
+	</array>
+	<key>com.apple.wlan.authentication</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>apple</string>
+		<string>com.apple.identities</string>
+		<string>com.apple.certificates</string>
+	</array>
+	<key>com.apple.private.system-keychain</key>
+	<true/>
 </dict>
 </plist>

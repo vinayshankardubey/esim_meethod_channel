@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:esim/esim_installer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_esim/flutter_esim.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: EsimInstallerHome(),
     );
   }
@@ -76,15 +77,15 @@ class EsimInstallerHomeState extends State<EsimInstallerHome> {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                if (Platform.isIOS) {
-                  launchUrlString(
-                    esimUrl,
-                    mode: LaunchMode.externalApplication,
-                  );
-                } else {
-                  installEsim();
-                  ;
-                }
+                // if (Platform.isIOS) {
+                //   print('launched');
+                //   launchUrlString(
+                //     esimUrl,
+                //     mode: LaunchMode.externalApplication,
+                //   );
+                // } else {
+                installEsim();
+                // }
               },
               child: const Text('Install eSIM Profile'),
             ),
